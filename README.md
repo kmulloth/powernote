@@ -18,7 +18,7 @@ Welcome to the [powernote](https://pwrnote.herokuapp.com/) wiki!
    * Users will be able to search through notebooks and tags
    
 
-[DB Diagram]([https://dbdiagram.io/d/62910770f040f104c1aeab72](https://dbdiagram.io/d/62aab2f79921fe2a96184f38))
+[DB Diagram](https://dbdiagram.io/d/62aab2f79921fe2a96184f38)
 
 [Scorecard](https://docs.google.com/spreadsheets/d/1ufo9p-QuN9B744p3FhCchIJ1g-N3zAK79jcrnhpRcx4/edit?usp=sharing)
 
