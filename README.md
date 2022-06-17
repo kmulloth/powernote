@@ -1,4 +1,4 @@
-# powernote
+# PwrNote
 Welcome to the [powernote](https://pwrnote.herokuapp.com/) wiki!
 
 ## Features
