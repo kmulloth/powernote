@@ -17,8 +17,25 @@ Welcome to the [powernote](https://pwrnote.herokuapp.com/) wiki!
  5. Search
    * Users will be able to search through notebooks and tags
    
+## Store Shape 
 
-[DB Diagram](https://dbdiagram.io/d/62aab2f79921fe2a96184f38)
+``` js
+store = {
+    session: {},
+    notebooks: {
+        // note that evernote allows you to create notes without manually putting it in a notebook. Setup a default notebook for this. 
+        notebookId: {
+            ...notebookData,
+            notes: {...normalizedNotes}
+        },
+        optionalOrderedList: []
+    }
+}
+```
+
+## [DB Diagram](https://dbdiagram.io/d/62aab2f79921fe2a96184f38)
+![image](https://user-images.githubusercontent.com/63429309/175616996-27c05572-c2b7-4d69-b837-feef278f07f5.png)
+
 
 [Scorecard](https://docs.google.com/spreadsheets/d/1ufo9p-QuN9B744p3FhCchIJ1g-N3zAK79jcrnhpRcx4/edit?usp=sharing)
 
