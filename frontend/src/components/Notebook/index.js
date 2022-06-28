@@ -17,11 +17,20 @@ function Notebook () {
 
 
     const [showNewNote, setShowNewNote] = useState(false);
-    const [note, setNote] = useState({});
+    const [note, setNote] = useState(notebookNotes[0]);
 
     useEffect(() => {
         dispatch(getNotes({include: [{model: 'User'}]}));
     }, [dispatch]);
+
+    useEffect(() => {
+        if (showNewNote) {
+            setNote({});
+        } else {
+            setNote(notebookNotes[0]);
+        }
+    }, [showNewNote]);
+
 
     return(
         <div className="notebook">
