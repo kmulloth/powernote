@@ -44,7 +44,7 @@ export const getNotes = () => async dispatch => {
 }
 
 export const addNote = note => async dispatch => {
-    const response = await csrfFetch('/notes', {
+    const response = await csrfFetch('/api/notes/new', {
         method: 'POST',
         body: JSON.stringify(note),
         headers: {
@@ -107,7 +107,7 @@ const noteReducer = (state = initialState, action) => {
 
             const newAddState = {
               ...state,
-              [action.payload.note.id]: action.payload.note
+              [action.payload.note?.id]: action.payload.note
             }
             // newState[action.payload.event.id]= action.payload
             // const eventList = newState.map(id => newState[id]);

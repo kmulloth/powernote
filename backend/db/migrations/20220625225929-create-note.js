@@ -22,7 +22,9 @@ module.exports = {
         references: {
           model: 'Notebooks',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       title: {
         type: Sequelize.STRING,
