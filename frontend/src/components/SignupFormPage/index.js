@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { addNotebook } from "../../store/notebook";
 import './SignupForm.css';
 
 function SignupFormPage() {
@@ -17,8 +18,18 @@ function SignupFormPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (password === confirmPassword) {
       setErrors([]);
+
+      const defaultNotebook = {
+        author_id: sessionUser.id,
+        title: "My Notebook",
+        color: "white",
+      };
+
+      dispatch(addNotebook(defaultNotebook));
+
       return dispatch(sessionActions.signup({ email, username, password }))
         .catch(async (res) => {
           const data = await res.json();
