@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -22,19 +22,23 @@ function SignupFormPage() {
     if (password === confirmPassword) {
       setErrors([]);
 
-      const defaultNotebook = {
-        author_id: sessionUser.id,
-        title: "My Notebook",
-        color: "white",
-      };
 
-      dispatch(addNotebook(defaultNotebook));
 
       return dispatch(sessionActions.signup({ email, username, password }))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      })
+      .then(() => {
+        const defaultNotebook = {
+          author_id: sessionUser.id,
+          title: "My Notebook",
+          color: "white",
+        };
+
+        dispatch(addNotebook(defaultNotebook));
+      });
+
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };

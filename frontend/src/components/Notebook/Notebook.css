@@ -1,0 +1,18 @@
+.notebook{
+    display: flex;
+    height: 100vh;
+}
+
+.Notebook-sidebar-header{
+    display: flex;
+}
+
+.Notebook-main{
+    display: flex;
+    flex-direction: column;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}

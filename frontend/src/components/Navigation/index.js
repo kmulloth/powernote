@@ -17,18 +17,28 @@ function Navigation({ isLoaded }){
   const [showNotebooks, setShowNotebooks] = useState(false);
 
   useEffect(() => {
-    if (!isLoaded) {
       dispatch(getNotebooks());
-    }
-  } , [dispatch, isLoaded]);
+  }, [dispatch, isLoaded]);
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <>
         <ProfileButton user={sessionUser} />
-        <NewNotebookModal />
         <button onClick={() => setShowNotebooks(!showNotebooks)}>Your Notebooks</button>
+        {sessionUser && showNotebooks && (
+        <div className="notebook-list">
+          <NewNotebookModal />
+          <ul className="notebooks">
+            {userNotebooks.map(notebook => (
+              <div key={notebook?.id}>
+                <li><NavLink to={`/notebooks/${notebook?.id}`} >{notebook?.title}</NavLink></li>
+                <DeleteNotebookModal notebook={notebook} setShowNotebooks={setShowNotebooks}/>
+              </div>
+            ))}
+          </ul>
+        </div>
+      )}
       </>
     );
   } else {
@@ -41,21 +51,9 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <>
     <nav id='navigation'>
       {isLoaded && sessionLinks}
     </nav>
-    {sessionUser && showNotebooks && (
-      <ul className="notebooks">
-        {userNotebooks.map(notebook => (
-          <div key={notebook?.id}>
-            <li>{notebook?.title}</li>
-            <DeleteNotebookModal notebook={notebook} />
-          </div>
-        ))}
-      </ul>
-    )}
-    </>
   );
 }
 

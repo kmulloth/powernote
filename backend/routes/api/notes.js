@@ -20,11 +20,11 @@ router.get('/:id', asyncHandler(async (req, res) => {
     return res.json(note);
 }));
 
-router.post('/', requireAuth, asyncHandler(async (req, res) => {
+router.post('/new', requireAuth, asyncHandler(async (req, res) => {
    const { author_id, notebook_id, title, body  } = req.body;
     const note = await Note.create({
-        authorId: author_id,
-        notebookId: notebook_id,
+        author_id,
+        notebook_id,
         title,
         body
     });
