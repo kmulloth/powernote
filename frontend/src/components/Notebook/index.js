@@ -24,12 +24,12 @@ function Notebook () {
     }, [dispatch, setShowNewNote]);
 
     useEffect(() => {
-        if (showNewNote) {
+        if (showNewNote || note.notebook_id != notebookId) {
             setNote({});
         } else {
             setNote(notebookNotes[0]);
         }
-    }, [showNewNote]);
+    }, [showNewNote, notebookId]);
 
     // useEffect(() => {
     //     if (note) {
