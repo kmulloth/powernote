@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     });
     notebook.hasMany(models.Note, {
       foreignKey: 'notebook_id',
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      hooks: 'true'
     });
   };
   return notebook;

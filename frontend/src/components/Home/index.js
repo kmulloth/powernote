@@ -17,7 +17,6 @@ function Home () {
     return(
         <div className="home">
             <h1>Notes</h1>
-            <NewNoteModal />
 
         {
             userNotes.map(note => (

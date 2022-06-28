@@ -21,7 +21,7 @@ function Notebook () {
 
     useEffect(() => {
         dispatch(getNotes({include: [{model: 'User'}]}));
-    }, [dispatch]);
+    }, [dispatch, setShowNewNote]);
 
     useEffect(() => {
         if (showNewNote) {
@@ -31,11 +31,13 @@ function Notebook () {
         }
     }, [showNewNote]);
 
-    useEffect(() => {
-        if (Object.keys(note).length > 0) {
-            setShowNewNote(false);
-        }
-    }, [note]);
+    // useEffect(() => {
+    //     if (note) {
+    //         if (note !== {}) {
+    //             setShowNewNote(false);
+    //         }
+    //     }
+    // }, [note]);
 
 
     return(
@@ -49,13 +51,16 @@ function Notebook () {
             {
                 notebookNotes.map(note => (
                     <div key={note?.id}>
-                        <button onClick={e => setNote(note)}>{note?.title}</button>
+                        <button onClick={e => {
+                            setNote(note)
+                            setShowNewNote(false)
+                            }}>{note?.title}</button>
                     </div>))
             }
             </div>
             <div className="Notebook-main">
                 {showNewNote && <NewNote notebookId={notebookId} setShowNewNote={setShowNewNote}/>}
-                {Object.keys(note).length > 0 && <Note note={note} setNote={setNote}/>}
+                {note && <Note note={note} setNote={setNote}/>}
             </div>
         </div>
     )

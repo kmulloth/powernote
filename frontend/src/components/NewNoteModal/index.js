@@ -21,6 +21,7 @@ function NewNote({setShowNewNote}) {
         dispatch(addNote(note))
         history.push(`/notebooks/${notebookId}`);
         setShowNewNote(false);
+
     }
 
     return(
