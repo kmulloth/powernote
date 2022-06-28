@@ -8,7 +8,7 @@ function Home () {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state?.session?.user);
     const allNotes = useSelector(state => state?.note)
-    const userNotes = Object.values(allNotes).filter(note => note.author_id === sessionUser.id)
+    const userNotes = Object.values(allNotes).filter(note => note?.author_id === sessionUser?.id)
 
     useEffect(() => {
         dispatch(getNotes({include: [{model: 'User'}]}));

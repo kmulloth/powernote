@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {addNote} from '../../store/note';
+import {addNote, getNotes} from '../../store/note';
 import {useHistory} from 'react-router-dom';
 
 function NewNote({setShowNewNote}) {
@@ -13,15 +13,14 @@ function NewNote({setShowNewNote}) {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const note = { author_id: userId, notebook_id: notebookId, title, body };
         console.log(note);
         dispatch(addNote(note))
-        history.push(`/notebooks/${notebookId}`);
-        setShowNewNote(false);
-
+        .then(history.push(`/notebooks/${notebookId}`))
+        .then(setShowNewNote(false))
+        .then(dispatch(getNotes({include: [{model: 'User'}]})));
     }
 
     return(
