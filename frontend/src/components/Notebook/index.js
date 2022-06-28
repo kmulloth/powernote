@@ -31,6 +31,12 @@ function Notebook () {
         }
     }, [showNewNote]);
 
+    useEffect(() => {
+        if (Object.keys(note).length > 0) {
+            setShowNewNote(false);
+        }
+    }, [note]);
+
 
     return(
         <div className="notebook">
