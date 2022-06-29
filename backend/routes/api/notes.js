@@ -34,11 +34,12 @@ router.post('/new', requireAuth, asyncHandler(async (req, res) => {
 }))
 
 router.put('/:id', requireAuth, asyncHandler(async (req, res) => {
-    const { title, body } = req.body;
-    const note = await Note.findByPk({
-        where : {id: req.params.id},
-        include: [User, Notebook]
-    });
+    const { id, author_id, notebook_id, title, body } = req.body;
+    console.log('!!!!',req.body)
+    const note = await Note.findByPk(id);
+    console.log('::::',note)
+    note.author_id = author_id;
+    note.notebook_id = notebook_id;
     note.title = title;
     note.body = body;
 

@@ -25,6 +25,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <ProfileButton user={sessionUser} />
+        <NavLink to="/">Home</NavLink>
         <button onClick={() => setShowNotebooks(!showNotebooks)}>Your Notebooks</button>
         {sessionUser && showNotebooks && (
         <div className="notebook-list">

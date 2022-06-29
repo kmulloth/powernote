@@ -1,25 +1,28 @@
 import {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {addNote, getNotes} from '../../store/note';
+import {editNote, getNotes} from '../../store/note';
 import {useHistory} from 'react-router-dom';
 
-function NewNote({setShowNewNote}) {
+function EditNote({setShowEditNote, note}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const {notebookId} = useParams();
+    const noteId = note?.id;
 
     const userId = useSelector(state => state?.session?.user?.id);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
 
+    console.log('NOTE ID::', noteId)
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const note = { author_id: userId, notebook_id: notebookId, title, body };
+        const note = { id: noteId, author_id: userId, notebook_id: parseInt(notebookId), title, body };
         console.log(note);
-        dispatch(addNote(note))
+        dispatch(editNote(note))
         .then(history.push(`/notebooks/${notebookId}`))
-        .then(setShowNewNote(false))
+        .then(setShowEditNote(false))
         .then(dispatch(getNotes({include: [{model: 'User'}]})));
     }
 
@@ -42,4 +45,4 @@ function NewNote({setShowNewNote}) {
     )
 }
 
-export default NewNote;
+export default EditNote;

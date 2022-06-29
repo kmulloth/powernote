@@ -59,8 +59,9 @@ export const addNote = note => async dispatch => {
     }
 }
 
-export const editNote = note => async dispatch => {
-    const response = await csrfFetch(`/notes/${note.id}`, {
+export const editNote = (note) => async dispatch => {
+    console.log(note);
+    const response = await csrfFetch(`/api/notes/${note?.id}`, {
         method: 'PUT',
         body: JSON.stringify(note),
         headers: {
@@ -97,7 +98,7 @@ const noteReducer = (state = initialState, action) => {
         case UPDATE_NOTE:
             const newEditState = {
               ...state,
-              [action.payload.note.id]: action.payload.note
+              [action.payload?.note?.id]: action.payload.note
             }
             // const eventList = newState.map(id => newState[id]);
             // eventList.push(action.payload)

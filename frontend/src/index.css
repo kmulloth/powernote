@@ -7,6 +7,11 @@
     font-family:'Future Sans', sans-serif;
 }
 
+body{
+    padding: 0;
+    margin: 0;
+}
+
 button {
     background-color: green;
 }

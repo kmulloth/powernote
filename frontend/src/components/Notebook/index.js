@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getNotes, addNote, editNote, deleteNote} from '../../store/note';
 import NewNote from '../NewNoteModal';
+import EditNote from '../EditNote';
 import Note from '../Note';
 import './Notebook.css';
 
@@ -19,14 +20,19 @@ function Notebook () {
 
     const userId = useSelector(state => state?.session?.user?.id);
     const [showNewNote, setShowNewNote] = useState(false);
+    const [showEditNote, setShowEditNote] = useState(false);
     const [note, setNote] = useState(notebookNotes[0]);
 
 
     useEffect(() => {
+
+        console.log(note)
         dispatch(getNotes({include: [{model: 'User'}]}));
+
     }, [dispatch, setShowNewNote]);
 
     useEffect(() => {
+        console.log(note)
         if (showNewNote || note?.notebook_id != notebookId) {
             setNote({});
         } else {
@@ -54,7 +60,19 @@ function Notebook () {
             </div>
             <div className="Notebook-main">
                 {showNewNote && <NewNote notebookId={notebookId} setShowNewNote={setShowNewNote} />}
-                {note && <Note note={note} setNote={setNote}/>}
+                {showEditNote&& <EditNote notebookId={notebookId} setShowEditNote={setShowEditNote} note={note} />}
+                {note && <div className="Note">
+                                <div className='content'>
+                                    <div>
+                                        <h1>{note?.title}</h1>
+                                        <div className='note-buttons'>
+                                            <button onClick={e => setShowEditNote(!showEditNote) } >Edit</button>
+                                            <button>Delete</button>
+                                        </div>
+                                    </div>
+                                    <p>{note?.body}</p>
+                                </div>
+                            </div>}
             </div>
         </div>
     )
