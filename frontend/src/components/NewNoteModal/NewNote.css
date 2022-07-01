@@ -1,3 +1,43 @@
 .new-note {
     height: 100%;
+    width: 100%;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.new-note-title {
+    display: flex;
+    width: 100%;
+}
+
+.new-note-title > input {
+    border: none;
+    border-bottom: 2px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.new-note-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.new-note-body > textarea {
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    height: 96%;
+
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 10px;
 }

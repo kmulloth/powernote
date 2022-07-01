@@ -4,7 +4,12 @@
     width: 85%;
     margin: 10px;
 }
-
+.Note{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
 .Notebook-sidebar {
     width: 20%;
 }
@@ -17,7 +22,7 @@
 .Notebook-main{
     /* display: flex; */
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     height: 100%;
     width: 80%;
 }

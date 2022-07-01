@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getNotes, addNote, editNote, deleteNote} from '../../store/note';
 import NewNote from '../NewNoteModal';
 import EditNote from '../EditNote';
+import DeleteNoteModal from '../DeleteNoteModal';
 import Note from '../Note';
 import './Notebook.css';
 
@@ -19,20 +20,16 @@ function Notebook () {
 
 
     const userId = useSelector(state => state?.session?.user?.id);
-    const [showNewNote, setShowNewNote] = useState(false);
+    const [showNewNote, setShowNewNote] = useState(true);
     const [showEditNote, setShowEditNote] = useState(false);
     const [note, setNote] = useState(notebookNotes[0]);
 
 
     useEffect(() => {
-
-        console.log(note)
         dispatch(getNotes({include: [{model: 'User'}]}));
-
-    }, [dispatch, setShowNewNote]);
+    }, [dispatch, showEditNote, showNewNote]);
 
     useEffect(() => {
-        console.log(note)
         if (showNewNote || note?.notebook_id != notebookId) {
             setNote({});
         } else {
@@ -59,15 +56,15 @@ function Notebook () {
             }
             </div>
             <div className="Notebook-main">
-                {showNewNote && <NewNote notebookId={notebookId} setShowNewNote={setShowNewNote} />}
-                {showEditNote&& <EditNote notebookId={notebookId} setShowEditNote={setShowEditNote} note={note} />}
-                {note && <div className="Note">
+                {showNewNote && <NewNote notebookId={notebookId} setShowNewNote={setShowNewNote} dispatch={dispatch}/>}
+                {showEditNote&& <EditNote notebookId={notebookId} setShowEditNote={setShowEditNote} note={note} dispatch={dispatch}/>}
+                {note && note.title && <div className="Note" >
                                 <div className='content'>
                                     <div>
                                         <h1>{note?.title}</h1>
                                         <div className='note-buttons'>
                                             <button onClick={e => setShowEditNote(!showEditNote) } >Edit</button>
-                                            <button>Delete</button>
+                                            <DeleteNoteModal note={note} setShowNewNote={setShowNewNote} />
                                         </div>
                                     </div>
                                     <p>{note?.body}</p>

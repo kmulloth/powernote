@@ -26,10 +26,11 @@ function NewNotebook({setShowModal}) {
             <label>Title:
                 <input type="text" value={title} onChange={e => setTitle(e.target.value)} />
             </label>
-            <label>Color:
+            {!title && <p className="error">Title is required</p>}
+            {/* <label>Color:
                 <input type="color" value={color} onChange={e => setColor(e.target.value)} />
-            </label>
-            <input type="submit" value="Add Notebook" />
+            </label> */}
+            <input type="submit" value="Add Notebook" disabled={!title}/>
         </form>
     )
 }
