@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getNotes, addNote, editNote, deleteNote} from '../../store/note';
 import NewNote from '../NewNoteModal';
+import EditNote from '../EditNote';
+import DeleteNoteModal from '../DeleteNoteModal';
 import Note from '../Note';
 import './Notebook.css';
 
@@ -18,13 +20,14 @@ function Notebook () {
 
 
     const userId = useSelector(state => state?.session?.user?.id);
-    const [showNewNote, setShowNewNote] = useState(false);
+    const [showNewNote, setShowNewNote] = useState(true);
+    const [showEditNote, setShowEditNote] = useState(false);
     const [note, setNote] = useState(notebookNotes[0]);
 
 
     useEffect(() => {
         dispatch(getNotes({include: [{model: 'User'}]}));
-    }, [dispatch, setShowNewNote]);
+    }, [dispatch, showEditNote, showNewNote]);
 
     useEffect(() => {
         if (showNewNote || note?.notebook_id != notebookId) {
@@ -53,8 +56,20 @@ function Notebook () {
             }
             </div>
             <div className="Notebook-main">
-                {showNewNote && <NewNote notebookId={notebookId} setShowNewNote={setShowNewNote} />}
-                {note && <Note note={note} setNote={setNote}/>}
+                {showNewNote && <NewNote notebookId={notebookId} setShowNewNote={setShowNewNote} dispatch={dispatch}/>}
+                {showEditNote&& <EditNote notebookId={notebookId} setShowEditNote={setShowEditNote} note={note} dispatch={dispatch}/>}
+                {note && note.title && <div className="Note" >
+                                <div className='content'>
+                                    <div>
+                                        <h1>{note?.title}</h1>
+                                        <div className='note-buttons'>
+                                            <button onClick={e => setShowEditNote(!showEditNote) } >Edit</button>
+                                            <DeleteNoteModal note={note} setShowNewNote={setShowNewNote} />
+                                        </div>
+                                    </div>
+                                    <p>{note?.body}</p>
+                                </div>
+                            </div>}
             </div>
         </div>
     )
