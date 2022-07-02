@@ -6,6 +6,7 @@ import ProfileButton from './ProfileButton';
 import NewNotebookModal from '../NewNotebookModal';
 import DeleteNotebookModal from '../DeleteNotebookModal';
 import { getNotebooks, addNotebook } from '../../store/notebook';
+import { login } from '../../store/session';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -19,6 +20,16 @@ function Navigation({ isLoaded }){
   useEffect(() => {
       dispatch(getNotebooks());
   }, [dispatch, isLoaded]);
+
+  const handleDemoSubmit = (e) => {
+    e.preventDefault();
+
+    const credential = e.target[0].value;
+    const password = e.target[1].value;
+    console.log('TARGET: ', e.target)
+    console.log('CREDENTIAL: ',credential,'PWORD: ', password, 'E: ', e);
+    return dispatch(login({ credential, password }))
+  }
 
   let sessionLinks;
   if (sessionUser) {
@@ -45,6 +56,11 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <div id='session-links'>
+        <form action='/api/session' method='POST' onSubmit={handleDemoSubmit}>
+          <input type='hidden' name='userName' value='Demo-lition' />
+          <input type='hidden' name='password' value='password' />
+          <button type='submit'>Demo</button>
+        </form>
         <NavLink to="/login">Log In</NavLink>
         <NavLink to="/signup">Sign Up</NavLink>
       </div>
