@@ -57,14 +57,14 @@ function Notebook () {
             </div>
             <div className="Notebook-main">
                 {showNewNote && <NewNote notebookId={notebookId} setShowNewNote={setShowNewNote} dispatch={dispatch}/>}
-                {showEditNote&& <EditNote notebookId={notebookId} setShowEditNote={setShowEditNote} note={note} dispatch={dispatch}/>}
+                {showEditNote&& <EditNote notebookId={notebookId} setShowEditNote={setShowEditNote} note={note} dispatch={dispatch} setNote={setNote}/>}
                 {note && note.title && <div className="Note" >
                                 <div className='content'>
                                     <div>
                                         <h1>{note?.title}</h1>
                                         <div className='note-buttons'>
                                             <button onClick={e => setShowEditNote(!showEditNote) } >Edit</button>
-                                            <DeleteNoteModal note={note} setShowNewNote={setShowNewNote} />
+                                            <DeleteNoteModal note={note} setShowNewNote={setShowNewNote} setNote={setNote}/>
                                         </div>
                                     </div>
                                     <p>{note?.body}</p>

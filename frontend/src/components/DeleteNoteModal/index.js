@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import DeleteNote from './DeleteNote';
 
-function DeleteNoteModal({ note }) {
+function DeleteNoteModal({ note, setNote }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ function DeleteNoteModal({ note }) {
         }}><i className="fa-solid fa-trash fa-xs"></i></button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <DeleteNote setShowModal={setShowModal} note={note}/>
+          <DeleteNote setShowModal={setShowModal} note={note} setNote={setNote}/>
         </Modal>
       )}
     </>

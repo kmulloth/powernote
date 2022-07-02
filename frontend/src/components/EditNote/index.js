@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {editNote, getNotes} from '../../store/note';
 import {useHistory} from 'react-router-dom';
 
-function EditNote({setShowEditNote, note, dispatch}) {
+function EditNote({setShowEditNote, note, dispatch, setNote}) {
     // const dispatch = useDispatch();
     const history = useHistory();
     const {notebookId} = useParams();
@@ -23,9 +23,10 @@ function EditNote({setShowEditNote, note, dispatch}) {
         const note = { id: noteId, author_id: userId, notebook_id: parseInt(notebookId), title, body };
         console.log(note);
         dispatch(editNote(note))
-        .then(setShowEditNote(false))
-        .then(dispatch(getNotes({include: [{model: 'User'}]})))
-        .then(history.push(`/notebooks/${notebookId}`))
+        dispatch(getNotes({include: [{model: 'User'}]}))
+        setShowEditNote(false)
+        setNote({})
+        history.push(`/notebooks/${notebookId}`)
     }
 
     return(

@@ -17,14 +17,6 @@ function Home () {
     return(
         <div className="home">
             <h1>Notes</h1>
-
-        {
-            userNotes.map(note => (
-                <div key={note?.id}>
-                    <h2>{note?.title}</h2>
-                    <p>{note?.body}</p>
-                </div>))
-        }
         </div>
     )
 }

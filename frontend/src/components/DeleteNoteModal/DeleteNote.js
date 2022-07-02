@@ -2,16 +2,17 @@ import { deleteNote } from '../../store/note';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function DeleteNote ({note, setShowModal}) {
+function DeleteNote ({note, setShowModal, setNote}) {
     const history = useHistory();
     const dispatch = useDispatch();
     // const note = useSelector(state => state.note[noteId]);
 
     const handleSubmit = e => {
-        console.log(note)
         e.preventDefault();
+
         dispatch(deleteNote(note?.id))
-        setShowModal(false);
+        setShowModal(false)
+        setNote({})
         history.push(`/notebooks/${note?.notebook_id}`);
     }
 
