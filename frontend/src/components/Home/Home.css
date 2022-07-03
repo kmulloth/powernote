@@ -1,0 +1,10 @@
+.home, .img-container, .img-container img {
+  width: 100%;
+}
+
+.select-notebooks {
+    border: 3px solid #ccc;
+    margin: 0% 5%;
+    padding: 15px 25px;
+
+}

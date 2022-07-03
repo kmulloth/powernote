@@ -2,7 +2,8 @@
     display: flex;
     height: 100vh;
     width: 85%;
-    margin: 10px;
+    margin: 0px;
+    background-color:rgb(32, 32, 32)
 }
 .Note{
     display: flex;
@@ -12,6 +13,7 @@
 }
 .Notebook-sidebar {
     width: 20%;
+    padding: 20px;
 }
 
 .Notebook-sidebar-header{
@@ -25,6 +27,8 @@
     /* justify-content: space-between; */
     height: 100%;
     width: 80%;
+    padding: 20px;
+    background-color:rgb(52, 51, 51)
 }
 
 .content{
