@@ -14,7 +14,6 @@ function Home () {
     const userNotes = Object.values(allNotes).filter(note => note?.author_id === sessionUser?.id)
     const allNotebooks = useSelector(state => state?.notebook)
     const userNotebooks = Object.values(allNotebooks).filter(notebook => notebook?.author_id === sessionUser?.id)
-    console.log(userNotebooks)
 
     useEffect(() => {
         dispatch(getNotes({include: [{model: 'User'}]}));
