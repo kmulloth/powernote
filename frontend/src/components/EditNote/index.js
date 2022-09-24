@@ -11,8 +11,8 @@ function EditNote({setShowEditNote, note, dispatch, setNote}) {
     const noteId = note?.id;
 
     const userId = useSelector(state => state?.session?.user?.id);
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
+    const [title, setTitle] = useState(note?.title);
+    const [body, setBody] = useState(note?.body);
 
     useEffect(() => {
         dispatch(getNotes({include: [{model: 'User'}]}));
